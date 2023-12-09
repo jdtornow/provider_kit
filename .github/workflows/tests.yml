@@ -1,0 +1,23 @@
+name: Tests
+
+on:
+  push
+
+jobs:
+  lint_ruby:
+    name: "Lint Ruby"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Install Yarn dependencies
+        run: yarn install
+
+      - name: Rubocop
+        run: bundle exec rubocop --parallel
