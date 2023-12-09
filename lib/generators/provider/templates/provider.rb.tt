@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+module <%= class_name %>
+  class Provider
+
+    include ProviderKit::Capable
+
+    # Use credentials for the Current.account when set
+    # include AccountCredentiable
+<% capabilities.each do |capability| %>
+    capable_of :<%= capability.underscore %>, with: Capabilities::<%= capability %><% end %>
+  end
+end

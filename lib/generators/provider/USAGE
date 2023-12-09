@@ -1,0 +1,10 @@
+Description:
+    generate a new providerkit provider
+
+Example:
+    bin/rails generate provider CustomerIo
+
+    This will create:
+        app/providers/customer_io.rb
+        app/providers/customer_io/provider.rb
+        spec/providers/customer_io.rb

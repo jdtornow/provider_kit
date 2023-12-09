@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+module <%= class_name %>
+  module Capabilities
+    class <%= capability %>
+
+      # capability methods here
+
+    end
+  end
+end

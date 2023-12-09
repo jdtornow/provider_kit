@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+module <%= class_name %>
+
+  include ProviderKit::Context
+
+  # Change this if you want the provider name to be something else
+  def self.provider_key
+    :<%= provider_name %>
+  end
+
+end

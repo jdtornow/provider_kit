@@ -1,0 +1,34 @@
+require "rails_helper"
+
+RSpec.describe <%= class_name %> do
+
+  describe ".provider" do
+    it "is the provider" do
+      expect(<%= class_name %>.provider).to be_kind_of(<%= class_name %>::Provider)
+    end
+  end
+
+  describe ".provider_key" do
+    it "is :<%= provider_name %>" do
+      expect(<%= class_name %>.provider_key).to eq(:<%= provider_name %>)
+    end
+  end<% if types.any? %>
+
+  describe ".provider_types" do<% types.each do |type| %>
+    it "includes <%= type %>" do
+      expect(<%= class_name %>.provider_types).to include(:<%= type %>)
+      expect(ProviderKit.providers(type: :<%= type %>)).to include(<%= class_name %>::Provider)
+    end
+<% end %>
+  end<% end %><% capabilities.each do |capability| %>
+
+  context ".<%= capability.underscore %>" do
+    it "is a capability" do
+      expect(<%= class_name %>.capable_of?(:<%= capability.underscore %>)).to eq(true)
+      expect(<%= class_name %>.<%= capability.underscore %>).to be_kind_of(ProviderKit::Capability)
+    end
+
+    pending "fill in <%= class_name %>.<%= capability.underscore %> methods here"
+  end<% end %>
+
+end
