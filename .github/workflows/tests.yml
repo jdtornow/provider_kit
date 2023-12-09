@@ -16,8 +16,5 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Install Yarn dependencies
-        run: yarn install
-
       - name: Rubocop
         run: bundle exec rubocop --parallel

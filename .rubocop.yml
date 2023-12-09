@@ -5,6 +5,7 @@ AllCops:
   DisabledByDefault: true
   Exclude:
     - 'spec/**/*'
+    - 'vendor/**/*'
 
   SuggestExtensions: false
 
