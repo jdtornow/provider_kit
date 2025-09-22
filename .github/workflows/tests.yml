@@ -42,5 +42,8 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Migrate
+        run: bin/rails db:migrate
+
       - name: Run RSpec
         run: bundle exec rspec
