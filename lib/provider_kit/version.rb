@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProviderKit
 
   VERSION = "0.1.7"

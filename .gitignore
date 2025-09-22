@@ -1,1 +1,12 @@
+/.bundle/
+/doc/
+/log/*.log
+/pkg/
+/tmp/
+.cursor/rules/
+spec/dummy/tmp/
+spec/dummy/db/*.sqlite
+spec/dummy/log/
+coverage/
+vendor/bundle
 Gemfile.lock

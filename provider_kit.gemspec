@@ -11,19 +11,20 @@ Gem::Specification.new do |s|
   s.summary       = "A generic interface for dealing with third-party data providers and APIs."
   s.description   = "A generic interface for dealing with third-party data providers and APIs."
   s.license       = "MIT"
-  s.files         = Dir.glob("{app,config,db,lib}/**/*") + %w( README.md Rakefile )
+  s.files         = Dir.glob("{app,config,db,lib}/**/*") + %w( README.md LICENSE Rakefile )
   s.require_paths = %w( lib )
 
   s.required_ruby_version     = ">= 2.6.6"
   s.required_rubygems_version = ">= 1.8.11"
 
-  s.add_dependency "rails", "~> 7.0"
+  s.add_dependency "rails", "~> 8.0"
   s.add_dependency "zeitwerk", "~> 2.2"
 
-  s.add_development_dependency "rspec-rails", "~> 4.0"
-  s.add_development_dependency "factory_bot_rails", "~> 5.1"
-  s.add_development_dependency "shoulda-matchers", "~> 4.2"
-  s.add_development_dependency "simplecov", "~> 0.11"
-  s.add_development_dependency "rspec_junit_formatter", "~> 0.2"
-  s.add_development_dependency "appraisal"
+  s.add_development_dependency "annotaterb", "~> 4.15"
+  s.add_development_dependency "factory_bot_rails", "~> 6.5"
+  s.add_development_dependency "faker", "~> 3.5"
+  s.add_development_dependency "rspec-rails", "~> 8.0"
+  s.add_development_dependency "rubocop", "~> 1.76"
+  s.add_development_dependency "shoulda-matchers", "~> 6.5"
+  s.add_development_dependency "timecop", "~> 0.9"
 end

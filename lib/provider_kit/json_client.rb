@@ -34,7 +34,7 @@ module ProviderKit
     end
 
     def request(path, method: :get, params: {}, headers: {}, mode: nil)
-      path      = "/#{ path }".gsub(/\/\//, "/")
+      path      = "/#{ path }".gsub(%r{//}, "/")
       url       = "#{ base_url }#{ path }"
       headers   = default_headers.merge(headers)
       params    = default_params.merge(params)
