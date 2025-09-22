@@ -7,9 +7,10 @@ require "active_support/dependencies/autoload"
 require "zeitwerk"
 
 loader = Zeitwerk::Loader.new
-path = File.expand_path(File.join(File.dirname(__FILE__), "."))
+path = File.expand_path(File.join(File.dirname(__FILE__), "provider_kit"))
 
 loader.push_dir(path)
+loader.ignore(File.expand_path(path, "generators"))
 loader.setup
 
 module ProviderKit
