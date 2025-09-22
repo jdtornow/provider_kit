@@ -69,5 +69,4 @@ jobs:
         run: bin/rails db:migrate
 
       - name: Run Provider Generator
-        run: bundle exec rails g provider Tester
-        working-directory: spec/dummy
+        run: cd spec/dummy && bundle exec rails g provider Tester
