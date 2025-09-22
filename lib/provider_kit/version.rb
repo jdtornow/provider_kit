@@ -2,7 +2,7 @@
 
 module ProviderKit
 
-  VERSION = "0.1.7"
+  VERSION = "0.9.0"
 
   module Version
 
