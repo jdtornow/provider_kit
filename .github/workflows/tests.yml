@@ -25,11 +25,48 @@ jobs:
       - name: Lint Ruby files
         run: bin/rubocop --parallel
 
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    env:
+      RAILS_ENV: test
+      BUNDLE_PATH: vendor/bundle
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Add or replace dependency steps here
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
       - name: Migrate
         run: bin/rails db:migrate
 
       - name: Run RSpec
         run: bundle exec rspec
+
+  generator:
+    runs-on: ubuntu-latest
+    needs: lint
+    env:
+      RAILS_ENV: test
+      BUNDLE_PATH: vendor/bundle
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Add or replace dependency steps here
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Migrate
+        run: bin/rails db:migrate
 
       - name: Run Provider Generator
         run: bundle exec rails g provider Tester
