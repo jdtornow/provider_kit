@@ -28,6 +28,15 @@ describe ProviderKit::Registerable do
       expect(ProviderKit.registrations[:dummy].name).to eq("Dummy")
       expect(ProviderKit.registrations[:dummy].options[:secret_value]).to eq("TKTK")
     end
+
+    it "contains credentials access" do
+      expect(ProviderKit.registrations[:stripe]).to be_present
+      expect(ProviderKit.registrations[:stripe].credentials.secret_key).to eq("sk_test_123")
+
+      expect(ProviderKit.registrations[:paypal]).to be_present
+      expect(ProviderKit.registrations[:paypal].credentials.client_id).to eq("tktk")
+      expect(ProviderKit.registrations[:paypal].credentials.client_secret).to eq("sec_123")
+    end
   end
 
 end

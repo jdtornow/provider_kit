@@ -49,6 +49,7 @@ module ProviderKit
 
   ## Third-party API setup
   autoload :Capability
+  autoload :CapabilityExtension
   autoload :Capable
   autoload :Context
   autoload :Registration

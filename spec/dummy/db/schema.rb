@@ -10,5 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 0) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_22_212234) do
+  create_table "customers", force: :cascade do |t|
+    t.string "email"
+    t.string "stripe_external_key"
+    t.string "paypal_external_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "provider"
+    t.string "external_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index [ "customer_id" ], name: "index_subscriptions_on_customer_id"
+  end
+
+  add_foreign_key "subscriptions", "customers"
 end

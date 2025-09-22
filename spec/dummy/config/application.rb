@@ -12,6 +12,7 @@ Bundler.require(*Rails.groups)
 
 module Dummy
   class Application < Rails::Application
+
     config.load_defaults Rails::VERSION::STRING.to_f
 
     # For compatibility with applications that use this config
@@ -30,5 +31,6 @@ module Dummy
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     #
+
   end
 end

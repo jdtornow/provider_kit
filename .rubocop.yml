@@ -11,8 +11,6 @@ AllCops:
     - "tmp/**/*"
     - "vendor/**/*"
     - "db/schema.rb"
-    - "db/queue_schema.rb"
-    - "spec/dummy/**/*"
 
 Bundler/OrderedGems:
   Enabled: false
