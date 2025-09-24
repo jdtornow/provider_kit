@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_22_212234) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_24_160528) do
   create_table "customers", force: :cascade do |t|
     t.string "email"
     t.string "stripe_external_key"
     t.string "paypal_external_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "provider"
+    t.string "external_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

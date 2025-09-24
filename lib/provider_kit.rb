@@ -35,6 +35,7 @@ module ProviderKit
   end
 
   ## Core
+  autoload :Attribute
   autoload :Callbacks
   autoload :EncryptedSettings
   autoload :Encryptor
@@ -42,6 +43,7 @@ module ProviderKit
   autoload :JsonClient
   autoload :JsonRequest
   autoload :Logging
+  autoload :NullProvider
   autoload :Provideable
   autoload :Provider
   autoload :ProviderAttribute
@@ -57,5 +59,8 @@ module ProviderKit
   ## Set up extensions for this module
   extend Registerable
   extend Buildable
+
+  # this is just a placeholder for integrations that do not need a custom provider
+  register :null, class_name: "ProviderKit::NullProvider"
 
 end

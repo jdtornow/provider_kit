@@ -5,25 +5,10 @@ module ProviderKit
   module Provideable
 
     extend ActiveSupport::Concern
+    include Attribute
 
     included do
       validate :validate_provider_presence
-    end
-
-    def provider
-      if provider_key.present?
-        @provider ||= ProviderKit::ProviderAttribute.new(provider_key, record: self)
-      end
-    end
-
-    def provider=(value)
-      @provider = nil
-
-      write_attribute(:provider, value.to_s.presence)
-    end
-
-    def provider_key
-      read_attribute(:provider).to_s.presence
     end
 
     private
