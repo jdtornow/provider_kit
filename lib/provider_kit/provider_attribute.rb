@@ -6,6 +6,8 @@ module ProviderKit
 
     include Buildable
 
+    ATTRIBUTE_QUERY = /^(?<attribute>[a-z0-9_]+)\?$/.freeze
+
     attr_reader :key
     attr_reader :record
     attr_reader :context
@@ -25,18 +27,33 @@ module ProviderKit
     end
 
     def method_missing(method_name, *args)
-      return nil unless provider.present?
+      return super unless provider.present?
 
       if provider.respond_to?(method_name)
         return provider.public_send(method_name, *args)
       end
 
       # self.amazon_selling_partner? ==> self.key == :amazon_selling_partner
-      if match = method_name.to_s.match(/^(?<attribute>[a-z0-9_]+)\?$/)
+      if match = method_name.to_s.match(ATTRIBUTE_QUERY)
         return match[:attribute].to_clean_sym == key
       end
 
       provider.with_context(**context).public_send(method_name, *args)
+    end
+
+    def respond_to_missing?(method_name, include_private = false)
+      return super unless provider.present?
+
+      # Check if the provider responds to the method
+      return true if provider.respond_to?(method_name, include_private)
+
+      # Match dynamic `attribute?` methods
+      return true if method_name.to_s.match?(ATTRIBUTE_QUERY)
+
+      # Check if the provider with context responds to the method
+      return true if provider.with_context(**context).respond_to?(method_name, include_private)
+
+      super
     end
 
     def label

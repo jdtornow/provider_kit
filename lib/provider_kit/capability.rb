@@ -26,6 +26,15 @@ module ProviderKit
       end
     end
 
+    def respond_to_missing?(method_name, include_private = false)
+      if method_name.to_s.match?(/(.+)\?$/)
+        attribute_name = method_name.to_s.chomp("?")
+        return callable?(attribute_name)
+      end
+
+      callable?(method_name) || super
+    end
+
     def with_context(provider: @provider, **context)
       Capability.new(
         key,
@@ -42,8 +51,12 @@ module ProviderKit
 
       def call(method_name, *args, **kwargs)
         call_target = target
-        return nil unless call_target
-        return nil unless callable?(method_name)
+        return unless call_target
+
+        unless callable?(method_name)
+          raise NoMethodError,
+            "undefined method `#{ method_name }' for instance of #{ @target_klass }"
+        end
 
         raw_response = call_target.public_send(method_name, *args, **kwargs)
 

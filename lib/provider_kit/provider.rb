@@ -29,6 +29,10 @@ module ProviderKit
     def provider_instance
       return nil unless provider
 
+      if provider.class == Module
+        raise "Provider #{ provider } is a module, not a class"
+      end
+
       instance = provider.new
 
       if instance.respond_to?(:context=) && record != key
