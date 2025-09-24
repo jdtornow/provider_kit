@@ -41,6 +41,13 @@ module ProviderKit
       end
     end
 
+    # Null provider is a placeholder for integrations that do not need a custom provider
+    #
+    # returns true if this is the null provider
+    def null?
+      key == :null
+    end
+
     def provider_key
       key
     end
@@ -64,6 +71,14 @@ module ProviderKit
         return false unless capability
 
         capability.callable?(method_name)
+      end
+
+      def config
+        provider.config
+      end
+
+      def label
+        config[:name].presence || self.to_s.underscore.humanize
       end
 
       def method_missing(method_name, *args, **kwargs)

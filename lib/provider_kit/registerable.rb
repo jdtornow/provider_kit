@@ -5,7 +5,7 @@ module ProviderKit
   module Registerable
 
     def deregister(key)
-      if registration = registrations[key]
+      if registrations[key]
         config.registered_providers.delete(key)
       end
     end
@@ -18,6 +18,11 @@ module ProviderKit
       else
         providers(type:).last
       end
+    end
+
+    # special provider for placeholders
+    def null
+      ProviderKit.registrations[:null].klass
     end
 
     def providers(type: nil)
