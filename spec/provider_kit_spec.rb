@@ -40,6 +40,10 @@ describe "ProviderKit" do
 
       ProviderKit.config.type_defaults = {}
     end
+
+    it "has config.credentials_key for referencing rails creds" do
+      expect(ProviderKit.config.credentials_key).to be_present
+    end
   end
 
 end

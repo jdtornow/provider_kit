@@ -16,19 +16,8 @@ loader.setup
 module ProviderKit
 
   extend ActiveSupport::Autoload
-  include ActiveSupport::Configurable
 
   ## Config
-  configure do |config|
-    config.registered_providers = {}
-
-    # Set to :hash to just return a plain hash
-    config.capability_response_format = :object
-
-    # Default provider for given type
-    config.type_defaults = {}
-  end
-
   eager_autoload do
     autoload :Buildable
     autoload :Registerable
@@ -37,6 +26,7 @@ module ProviderKit
   ## Core
   autoload :Attribute
   autoload :Callbacks
+  autoload :Configuration
   autoload :EncryptedSettings
   autoload :Encryptor
   autoload :Execution
@@ -59,6 +49,16 @@ module ProviderKit
   ## Set up extensions for this module
   extend Registerable
   extend Buildable
+
+  ## Config
+
+  def self.config
+    @@config ||= Configuration.new
+  end
+
+  def self.configure(&)
+    yield config
+  end
 
   # this is just a placeholder for integrations that do not need a custom provider
   register :null, class_name: "ProviderKit::NullProvider"
