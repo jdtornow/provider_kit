@@ -13,4 +13,33 @@ describe "ProviderKit" do
     expect(ProviderKit::VERSION).to_not be_nil
   end
 
+  context ".config" do
+    it "has config.registered_providers" do
+      expect(ProviderKit.config.registered_providers).to be_kind_of(Hash)
+      expect(ProviderKit.config.registered_providers.keys).to include(:stripe)
+    end
+
+    it "has config.capability_response_format for default format" do
+      expect(ProviderKit.config.capability_response_format).to eq(:object)
+
+      ProviderKit.config.capability_response_format = :hash
+
+      expect(ProviderKit.config.capability_response_format).to eq(:hash)
+
+      ProviderKit.config.capability_response_format = :object
+    end
+
+    it "has config.type_defaults to override which type of provider should be used by default" do
+      expect(ProviderKit.config.type_defaults).to eq({})
+
+      ProviderKit.use(:stripe, for: :billing)
+
+      expect(ProviderKit.for(:billing)).to eq(StripeProvider::Provider)
+
+      expect(ProviderKit.config.type_defaults).to eq({ billing: :stripe })
+
+      ProviderKit.config.type_defaults = {}
+    end
+  end
+
 end
