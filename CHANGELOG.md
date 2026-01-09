@@ -1,5 +1,9 @@
 # provider_kit changelog
 
+## v0.3.0 – 2026-01-09
+
+- Removing dependency on ActiveSupport::Configurable to support Rails 8.2+
+
 ## v0.2.1 – 2025-09-24
 
 - minor bug fixes and improvements
