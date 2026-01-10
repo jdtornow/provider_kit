@@ -35,7 +35,7 @@ module ProviderKit
 
       # self.amazon_selling_partner? ==> self.key == :amazon_selling_partner
       if match = method_name.to_s.match(ATTRIBUTE_QUERY)
-        return match[:attribute].to_clean_sym == key
+        return match[:attribute].to_s.strip.downcase.to_sym == key
       end
 
       provider.with_context(**context).public_send(method_name, *args)

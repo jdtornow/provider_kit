@@ -12,7 +12,7 @@ module ProviderKit
 
     def for(type)
       if env_key = ENV["PROVIDER_FOR_#{ type.upcase }"].presence
-        registrations[env_key.to_clean_sym].klass
+        registrations[env_key.to_s.strip.downcase.to_sym].klass
       elsif default_key = config.type_defaults[type].presence
         registrations[default_key].klass
       else
