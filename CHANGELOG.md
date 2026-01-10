@@ -1,5 +1,9 @@
 # provider_kit changelog
 
+## v0.3.1 – 2026-01-10
+
+- Fix internal bug related to symbol conversion
+
 ## v0.3.0 – 2026-01-09
 
 - Removing dependency on ActiveSupport::Configurable to support Rails 8.2+
