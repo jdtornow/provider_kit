@@ -22,6 +22,12 @@ module ProviderKit
       to_s == other_key.to_s
     end
 
+    # Object#as_json falls back to instance_values, which includes @record. A record
+    # whose reader returns this attribute would then serialize itself forever.
+    def as_json(*)
+      to_s
+    end
+
     def inspect
       @key.inspect
     end
