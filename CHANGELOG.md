@@ -1,5 +1,10 @@
 # provider_kit changelog
 
+## v0.3.2 – 2026-11-10
+
+- ProviderAttribute serializes to its key in as_json, fixing infinite recursion when a record holding one is converted to JSON
+- A ProviderAttribute without a record also serializes to its key string, instead of a hash of its internal state
+
 ## v0.3.1 – 2026-01-10
 
 - Fix internal bug related to symbol conversion
