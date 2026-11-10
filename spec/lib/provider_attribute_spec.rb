@@ -40,12 +40,22 @@ describe ProviderKit::ProviderAttribute do
       expect(attribute.to_json).to eq("\"not_registered\"")
     end
 
-    it "is defined directly rather than forwarded through method_missing" do
+    it "serializes a blank key to the default key" do
+      attribute = described_class.new(nil)
+
+      expect(attribute.as_json).to eq("default")
+    end
+
+    it "serializes to its key when nested in a hash" do
       attribute = described_class.new(:stripe)
 
-      expect(described_class.public_method_defined?(:as_json, false)).to eq(true)
-      expect(attribute).not_to receive(:method_missing)
-      attribute.as_json
+      expect({ provider: attribute }.to_json).to eq("{\"provider\":\"stripe\"}")
+    end
+
+    it "is defined on the class rather than reached through method_missing" do
+      attribute = described_class.new(:stripe)
+
+      expect(attribute.method(:as_json).owner).to eq(described_class)
     end
 
     it "serializes a record holding one without recursing" do
@@ -60,6 +70,14 @@ describe ProviderKit::ProviderAttribute do
 
       expect(item.as_json["provider"]).to eq("stripe")
       expect(JSON.parse(item.to_json)["provider"]).to eq("stripe")
+    end
+  end
+
+  describe ".dump and .load" do
+    it "round trips the key string" do
+      expect(described_class.dump(described_class.new(:stripe))).to eq("stripe")
+      expect(described_class.dump(:stripe)).to eq("stripe")
+      expect(described_class.load("stripe")).to eq(:stripe)
     end
   end
 
